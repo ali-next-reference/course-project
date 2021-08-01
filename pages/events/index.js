@@ -22,4 +22,6 @@ const EventsPage = () => {
   );
 };
 
+// getStaticprops with isr
+
 export default EventsPage;

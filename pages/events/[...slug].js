@@ -62,4 +62,6 @@ const EventsPage = () => {
   );
 };
 
+// nothing, or serverside rendering
+
 export default EventsPage;

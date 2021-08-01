@@ -14,4 +14,6 @@ const HomePage = () => {
   );
 }
 
+// get static props with isr
+
 export default HomePage;

@@ -33,4 +33,6 @@ const EventDetailPage = () => {
   );
 };
 
+// get static props and get static paths
+
 export default EventDetailPage;
