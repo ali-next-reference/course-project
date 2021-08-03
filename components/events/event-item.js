@@ -7,8 +7,7 @@ import AddressIcon from "../icons/address-icon";
 import ArrowRightIcon from "../icons/arrow-right-icon";
 
 const EventItem = ({ item }) => {
-  console.log(item);
-  const formattedDate = new Date(item.date).toLocaleDateString("en-UK", {
+  const formattedDate = new Date(item.date).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",

@@ -6,9 +6,13 @@ const EventList = (props) => {
   const { items } = props
 
   const renderItemList = () => {
-    return  items.map(event => {
+    if(!items){
+      return <p>No events found 😔</p>
+    }
+
+    return items.map(event => {
       return (
-        <EventItem item={event}></EventItem>
+        <EventItem item={event} key={event.id}></EventItem>
       )
     })
   }
