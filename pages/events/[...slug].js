@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React, { Fragment, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -36,15 +37,41 @@ const EventsPage = () => {
     router.push(`/events/${year}/${month}`);
   };
 
+  // load different head data for this
+  // reusable head info
+  let pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name="description" content="a list of events" />
+    </Head>
+  );
+
   // filtered data doesn't show on first render, so handle it
   if (!router.query.slug) {
-    return <p className="center">Loading...</p>;
+    return (
+      <Fragment>
+        {pageHeadData}
+        <p className="center">Loading...</p>
+      </Fragment>
+    );
   }
 
   // get the date from the query params
   const [year, month] = router.query.slug;
   const numYear = +year;
   const numMonth = +month;
+
+  // reusable head info
+  pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name="description"
+        content={`All events for ${numMonth}/${numYear}`}
+      />
+    </Head>
+  );
+
   if (
     isNaN(numMonth) ||
     isNaN(numYear) ||
@@ -56,15 +83,19 @@ const EventsPage = () => {
   ) {
     return (
       <Fragment>
+        {pageHeadData}
         <EventsSearch onSearch={findEventsHandler}></EventsSearch>
         <ResultsTitle>Error finding events</ResultsTitle>
       </Fragment>
     );
   }
 
-  let filteredEvents=[]
-  if(loadedEvents){
-    filteredEvents = filterEvents(loadedEvents, { year: numYear, month: numMonth });
+  let filteredEvents = [];
+  if (loadedEvents) {
+    filteredEvents = filterEvents(loadedEvents, {
+      year: numYear,
+      month: numMonth,
+    });
   }
 
   // if (props.hasError) {
@@ -81,6 +112,7 @@ const EventsPage = () => {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <Fragment>
+        {pageHeadData}
         <EventsSearch onSearch={findEventsHandler}></EventsSearch>
         <ResultsTitle>No Events found</ResultsTitle>
       </Fragment>
@@ -91,6 +123,7 @@ const EventsPage = () => {
 
   return (
     <Fragment>
+      {pageHeadData}
       <EventsSearch onSearch={findEventsHandler}></EventsSearch>
       <ResultsTitle date={date}></ResultsTitle>
       <EventList items={filteredEvents}></EventList>
