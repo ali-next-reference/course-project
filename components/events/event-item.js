@@ -1,4 +1,6 @@
 import React from "react";
+// this helps with optimising image sizes
+import Image from 'next/image'
 
 import classes from "./event-item.module.css";
 import ButtonPrimary from "../ui/button-primary";
@@ -18,7 +20,8 @@ const EventItem = ({ item }) => {
   return (
     // class name has to be imported and used like this
     <li className={classes.item} key={item.id}>
-      <img src={item.image} alt={item.title} />
+      {/* optimise the image based on the device and browser that is requesting it */}
+      <Image src={item.image} alt={item.title} width={250} height={160}/>
       <div className={classes.content}>
         <div className={classes.summary}>
           <h2>{item.title}</h2>

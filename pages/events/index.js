@@ -18,6 +18,7 @@ const EventsPage = (props) => {
   return (
     <Fragment>
       <Head>
+        {/* next js takes the latest title element if there are conflicts */}
         <title>All events</title>
         <meta name="description" content="all events for web dev"/>
       </Head>
